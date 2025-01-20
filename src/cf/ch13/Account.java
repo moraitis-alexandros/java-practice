@@ -1,5 +1,9 @@
 package cf.ch13;
 
+import cf.ch13.exceptions.InsufficientBalanceException;
+import cf.ch13.exceptions.NegativeAmountException;
+import cf.ch13.exceptions.SsnNotValidException;
+
 /**
  * Defines a {@link Account} class.
  */
@@ -86,11 +90,12 @@ public class Account {
     public void deposit(double amount) throws Exception  {
         try {
         if (amount <= 0) {
-            throw new Exception("The amount must not be negative");
+//            throw new Exception("The amount must not be negative");
+            throw new NegativeAmountException(amount);
         }
         balance += amount;
             System.out.println("Amount "+amount+" successfully deposited."); //logging
-        } catch (Exception e) {
+        } catch (NegativeAmountException e) {
             System.err.println("Error. Amount " + amount + " cannot be negative.");
 //            e.printStackTrace();
             throw e;
@@ -114,24 +119,25 @@ public class Account {
      *          if the ssn is not valid or the balance is not sufficient or the amount is negative
      */
 
-    public void withdraw(double amount, String ssn) throws Exception {
+    public void withdraw(double amount, String ssn) throws SsnNotValidException, InsufficientBalanceException, NegativeAmountException {
         try {
             if (!isSsnValid(ssn)) {
-                throw new Exception("Ssn "+ssn+ " is not valid");
+                throw new SsnNotValidException(ssn);
             }
 
             if (balance < amount) {
-                throw new Exception("Insufficient balance " + balance + " for amount " +amount);
+                throw new InsufficientBalanceException(balance, amount);
             }
 
             if (amount <= 0) {
-                throw new Exception("The amount" + amount + " must not be negative");
+//                throw new Exception("The amount" + amount + " must not be negative");
+                throw new NegativeAmountException(amount);
             }
 
             balance -= amount;
             System.out.println("Amount " + amount + " successfully withdrawn");
 
-        } catch (Exception e) {
+        } catch (SsnNotValidException | NegativeAmountException | InsufficientBalanceException e) {
             System.err.println("Error " + e.getMessage());
 //            e.printStackTrace();
             throw e;
