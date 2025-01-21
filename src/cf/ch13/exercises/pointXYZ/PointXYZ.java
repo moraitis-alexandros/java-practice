@@ -1,4 +1,4 @@
-package cf.ch13.exercises;
+package cf.ch13.exercises.pointXYZ;
 
 public class PointXYZ {
 
