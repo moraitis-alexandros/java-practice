@@ -14,6 +14,13 @@ public class Main {
         System.out.println("Reversed: " + StringUtils.reverseString(string2));
         System.out.println("Is palindromic: " + StringUtils.isPalindromic(string2));
 
+        System.out.println(string1 + " length between 1-31: " + ValidationUtils.hasLengthFromOneToThirtyOne(string1));
+        System.out.println(string1 + " length between 1-10: " + ValidationUtils.hasLengthFromOneToTen(string1));
+        String string3 = "safhskdhfkshdfhskdhfskdhfksjdhfks"; // more than 31
+        System.out.println(string3 + " length between 1-31: " + ValidationUtils.hasLengthFromOneToThirtyOne(string3));
+        System.out.println(string3 + " length between 1-10: " + ValidationUtils.hasLengthFromOneToTen(string3));
+
+
 
     }//main
 
